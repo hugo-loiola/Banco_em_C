@@ -1,6 +1,6 @@
 # Projeto-Final
 
-Projeto final de Algoritimos
+### Grupo 3, Sistema de Banco;
 
 ### Alunos:
 

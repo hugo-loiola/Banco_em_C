@@ -41,7 +41,7 @@ ContaBancaria *criarConta()
 }
 void limparTela()
 {
-    system("clear");
+    system("cls");
 }
 int main()
 {

@@ -41,11 +41,11 @@ ContaBancaria *criarConta()
 }
 void limparTela()
 {
-    system("cls");
+    system("clear");
 }
 int main()
 {
-    char BancoNome[] = "O_BANCO";
+    char BancoNome[] = "BANCO MASSA DE MAIS VÉI";
     char senhaDigitada[20];
     int opcao;
 

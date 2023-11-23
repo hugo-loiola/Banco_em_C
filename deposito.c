@@ -4,6 +4,45 @@
 
 #define SENHA_PADRAO "money"
 void limparTela();
+
+// Estrutura para representar uma conta bancária
+typedef struct
+{
+    int numero_conta;
+    char nome_titular[50];
+    double saldo;
+} ContaBancaria;
+
+// Função para criar uma nova conta bancária
+ContaBancaria *criarConta()
+{
+    // Alocar memória para a estrutura da conta
+    ContaBancaria *nova_conta = (ContaBancaria *)malloc(sizeof(ContaBancaria));
+
+    // Verificar se a alocação foi bem-sucedida
+    if (nova_conta == NULL)
+    {
+        fprintf(stderr, "Erro ao alocar memória para a conta bancária\n");
+        exit(EXIT_FAILURE);
+    }
+
+    // Solicitar informações ao usuário
+    printf("Digite o número da conta: ");
+    scanf("%d", &nova_conta->numero_conta);
+
+    printf("Digite o nome do titular: ");
+    scanf("%s", nova_conta->nome_titular);
+
+    printf("Digite o saldo inicial: ");
+    scanf("%lf", &nova_conta->saldo);
+
+    // Retornar o ponteiro para a nova conta
+    return nova_conta;
+}
+void limparTela()
+{
+    system("cls");
+}
 int main()
 {
     char BancoNome[] = "O_BANCO";
@@ -45,7 +84,15 @@ int main()
         switch (opcao)
         {
         case 1:
-            printf("1 - COLOQUE SUA FUNCAO\n");
+            // Exibir informações da conta
+            ContaBancaria *minha_conta = criarConta();
+
+            printf("Número da Conta: %d\n", minha_conta->numero_conta);
+            printf("Titular da Conta: %s\n", minha_conta->nome_titular);
+            printf("Saldo: %.2f\n", minha_conta->saldo);
+
+            // Liberar a memória alocada para a conta
+            free(minha_conta);
             break;
         case 2:
             printf("2 - COLOQUE SUA FUNCAO\n");
@@ -77,8 +124,4 @@ int main()
     }
 
     return 0;
-}
-void limparTela()
-{
-    system("cls");
 }

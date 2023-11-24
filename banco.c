@@ -83,7 +83,7 @@ int main()
 
         switch (opcao)
         {
-        case 1:
+        case 1: ;
             // Exibir informações da conta
             ContaBancaria *minha_conta = criarConta();
 

@@ -104,7 +104,7 @@ int main()
             printf("4 - COLOQUE SUA FUNCAO\n");
             break;
         case 5:
-            printf("5 - COLOQUE SUA FUNCAO\n");
+            printf("5 - número da conta a ser removida: \n");
             break;
         case 6:
             printf("6 - COLOQUE SUA FUNCAO\n");

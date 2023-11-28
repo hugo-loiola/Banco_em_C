@@ -2,9 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
-
-#define SENHA_PADRAO "money"
 #define MAX_CONTAS 10 // Máximo de contas
+
+int senhaCorreta(char* senha){
+    return strcmp(senha, "money") == 0;
+}
+
+int senhaIncorreta(char* senha){
+    return strcmp(senha, "money") != 0;
+}
 
 void limparTela();
 
@@ -53,7 +59,6 @@ void limparTela()
 int main()
 {
     char BancoNome[] = "BANCO MASSA DE MAIS VEI";
-    char senhaDigitada[20];
     int opcao;
     setlocale(LC_ALL, "");
 
@@ -72,18 +77,20 @@ int main()
     do
     {
         limparTela();
-        printf("Digite a senha: ");
-        scanf("%s", senhaDigitada);
+        char senha[20];
 
-        if (strcmp(senhaDigitada, SENHA_PADRAO) != 0)
-        {
-            printf("Senha incorreta! Tente novamente.\n");
-            printf("Pressione Enter para continuar...");
-            getchar();
-            getchar();
-        }
-    } while (strcmp(senhaDigitada, SENHA_PADRAO) != 0);
-
+while(1){
+   printf("digite sua senha: ");
+   scanf("%s", senha);
+if(senhaCorreta(senha)){
+    printf("Bem vindo ao Banco");
+    break;
+} else if(senhaIncorreta(senha)){
+   printf("Senha incorreta! Tente novamente.\n"); 
+  
+} 
+}
+      
     while (1)
     {
 

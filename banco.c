@@ -3,6 +3,8 @@
 #include <string.h>
 
 #define SENHA_PADRAO "money"
+#define MAX_CONTAS 10 // Máximo de contas
+
 void limparTela();
 
 // Estrutura para representar uma conta bancária
@@ -12,6 +14,8 @@ typedef struct
     char nome_titular[50];
     double saldo;
 } ContaBancaria;
+
+ContaBancaria **contas;
 
 // Função para criar uma nova conta bancária
 ContaBancaria *criarConta()
@@ -39,15 +43,29 @@ ContaBancaria *criarConta()
     // Retornar o ponteiro para a nova conta
     return nova_conta;
 }
+
 void limparTela()
 {
     system("cls");
 }
+
 int main()
 {
     char BancoNome[] = "BANCO MASSA DE MAIS VEI";
     char senhaDigitada[20];
     int opcao;
+
+    contas = (ContaBancaria **)malloc(MAX_CONTAS * sizeof(ContaBancaria *));
+    if (contas == NULL)
+    {
+        fprintf(stderr, "Erro ao alocar memória para o vetor de contas\n");
+        exit(EXIT_FAILURE);
+    }
+
+    for (int i = 0; i < MAX_CONTAS; i++)
+    {
+        contas[i] = NULL;
+    }
 
     do
     {
@@ -66,33 +84,43 @@ int main()
 
     while (1)
     {
-        limparTela();
 
         printf("%s\n", BancoNome);
         printf("\n------------ MENU ------------\n");
         printf("1 - Criar nova Conta\n");
         printf("2 - Depositar e sacar dinheiro em uma nova conta\n");
         printf("3 - Mostrar saldo total de cada conta\n");
-        printf("4 - Editar informacoes do titular de uma conta\n");
+        printf("4 - Editar informações do titular de uma conta\n");
         printf("5 - Remover conta\n");
         printf("6 - Transferir valor de uma conta para outra\n");
         printf("7 - Salvar dados de uma conta em um arquivo\n");
         printf("8 - SAIR\n");
-        printf("\nEscolha uma opcao: ");
+        printf("\nEscolha uma opção: ");
         scanf("%d", &opcao);
 
         switch (opcao)
         {
-        case 1: ;
+        case 1:;
             // Exibir informações da conta
             ContaBancaria *minha_conta = criarConta();
 
-            printf("Número da Conta: %d\n", minha_conta->numero_conta);
-            printf("Titular da Conta: %s\n", minha_conta->nome_titular);
-            printf("Saldo: %.2f\n", minha_conta->saldo);
+            // Encontrar um espaço vazio no array
+            int i;
+            for (i = 0; i < MAX_CONTAS && contas[i] != NULL; i++)
+            {
+            }
 
-            // Liberar a memória alocada para a conta
-            free(minha_conta);
+            // Checar se o número de contas
+            if (i < MAX_CONTAS)
+            {
+                contas[i] = minha_conta;
+                printf("Conta criada com sucesso!\n");
+            }
+            else
+            {
+                printf("Limite de contas atingido. Não é possível criar mais contas.\n");
+                free(minha_conta); // Liberar memória, se possível
+            }
             break;
         case 2:
             printf("2 - COLOQUE SUA FUNCAO\n");
@@ -104,7 +132,7 @@ int main()
             printf("4 - COLOQUE SUA FUNCAO\n");
             break;
         case 5:
-             printf("5 - COLOQUE SUA FUNCAO\n");
+            printf("5 - COLOQUE SUA FUNCAO\n");
             break;
         case 6:
             printf("6 - COLOQUE SUA FUNCAO\n");
@@ -113,10 +141,19 @@ int main()
             printf("7 - COLOQUE SUA FUNCAO\n");
             break;
         case 8:
-            printf("Fim da operacao %s\n", BancoNome);
+            printf("Fim da operação %s\n", BancoNome);
+
+            for (int i = 0; i < MAX_CONTAS; i++)
+            {
+                free(contas[i]);
+            }
+
+            // Liberar memoria quando o código terminar
+            free(contas);
+
             exit(0);
         default:
-            printf("Opcao incorreta. Pressione Enter para continuar...");
+            printf("Opção incorreta. Pressione Enter para continuar...");
             getchar();
             getchar();
             break;

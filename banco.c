@@ -25,7 +25,7 @@ ContaBancaria *criarConta()
   // Verificar se a alocação foi bem-sucedida
   if (nova_conta == NULL)
   {
-    fprintf(stderr, "Erro ao alocar memória para a conta bancária\n");
+    fprintf(stderr, "Erro ao alocar memoria para a conta bancaria\n");
     exit(EXIT_FAILURE);
   }
 
@@ -71,7 +71,7 @@ int main()
   contas = (ContaBancaria **)malloc(MAX_CONTAS * sizeof(ContaBancaria *));
   if (contas == NULL)
   {
-    fprintf(stderr, "Erro ao alocar memória para o vetor de contas\n");
+    fprintf(stderr, "Erro ao alocar memoria para o vetor de contas\n");
     exit(EXIT_FAILURE);
   }
 
@@ -83,7 +83,7 @@ int main()
   do
   {
 
-    printf("Digite a senha: ");
+    printf("Digite a senha para acessar o sistema do banco: ");
     scanf("%s", senhaDigitada);
 
     if (strcmp(senhaDigitada, SENHA_PADRAO) != 0)
@@ -103,7 +103,7 @@ int main()
     printf("1 - Criar nova Conta\n");
     printf("2 - Depositar e sacar dinheiro em uma nova conta\n");
     printf("3 - Mostrar saldo total de cada conta\n");
-    printf("4 - Editar informações do titular de uma conta\n");
+    printf("4 - Editar informacoes do titular de uma conta\n");
     printf("5 - Remover conta\n");
     printf("6 - Transferir valor de uma conta para outra\n");
     printf("7 - Salvar dados de uma conta em um arquivo\n");
@@ -131,7 +131,7 @@ int main()
       }
       else
       {
-        printf("Limite de contas atingido. Não é possível criar mais contas.\n");
+        printf("Limite de contas atingido. Nao eh possivel criar mais contas.\n");
 
         free(minha_conta); // Liberar memória, se possível
       }
@@ -168,7 +168,7 @@ int main()
 
       exit(0);
     default:
-      printf("Opção incorreta. Pressione Enter para continuar...");
+      printf("Opçao incorreta. Pressione Enter para continuar...");
       getchar();
       getchar();
       break;

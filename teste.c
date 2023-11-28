@@ -52,7 +52,6 @@ void limparTela()
 int main()
 {
     char BancoNome[] = "BANCO MASSA DE MAIS VEI";
-    char senhaDigitada[20];
     int opcao;
 
     contas = (ContaBancaria **)malloc(MAX_CONTAS * sizeof(ContaBancaria *));

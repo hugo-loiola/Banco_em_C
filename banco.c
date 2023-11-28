@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <locale.h>
 
 #define SENHA_PADRAO "money"
 #define MAX_CONTAS 10 // Máximo de contas
@@ -54,6 +55,7 @@ int main()
     char BancoNome[] = "BANCO MASSA DE MAIS VEI";
     char senhaDigitada[20];
     int opcao;
+    setlocale(LC_ALL, "");
 
     contas = (ContaBancaria **)malloc(MAX_CONTAS * sizeof(ContaBancaria *));
     if (contas == NULL)
@@ -119,6 +121,7 @@ int main()
             else
             {
                 printf("Limite de contas atingido. Não é possível criar mais contas.\n");
+
                 free(minha_conta); // Liberar memória, se possível
             }
             break;

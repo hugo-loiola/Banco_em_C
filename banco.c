@@ -70,12 +70,8 @@ void mostrarSaldoTotal()
   {
     saldoTotal += contas[i]->saldo;
   }
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> 643fd99d4ff1fe1094e3626f93220c7774a9241b
-  // Exibir o saldo total
+// Exibir o saldo total
   printf("Saldo total de todas as contas: %.2lf\n", saldoTotal);
 }
 

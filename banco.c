@@ -56,10 +56,6 @@ void mostrarSaldoTotal()
   {
     printf("Conta: %d saldo: %.2lf\n", contas[i]->numero_conta, contas[i]->saldo);
   }
-  for (int i = 0; i < MAX_CONTAS && contas[i] != NULL; i++)
-  {
-    saldoTotal += contas[i]->saldo;
-  }
 
   // Exibir o saldo total
   printf("Saldo total de todas as contas: %.2lf\n", saldoTotal);
@@ -159,7 +155,6 @@ void sacar()
 
 // Função para exibir um menu de operações em uma conta (depósito ou saque)
 void depositarSacar()
-
 {
     int escolha;
     printf("\n------------ MENU DE OPERAÇÕES EM CONTA ------------\n");
@@ -181,25 +176,45 @@ void depositarSacar()
     }
 }
 
-// Função para remover uma conta bancária
-void removerConta(int numeroConta)
-{
-  // Procurar a conta com o número especificado
-  for (int i = 0; i < MAX_CONTAS && contas[i] != NULL; i++)
-  {
-    if (contas[i]->numero_conta == numeroConta)
-    {
-      // Encontrou a conta, liberar memória e remover
-      free(contas[i]);
-      contas[i] = NULL;
-      printf("Conta removida com sucesso!\n");
-      return;
-    }
-  }
+void transferirvalor(){
+    int numeroConta;
+    double valor;
 
-  // Se chegou aqui, a conta não foi encontrada
-  printf("Conta não encontrada. Verifique o número da conta.\n");
+    printf("Digite o número da conta para transferir:\n");
+    scanf("%d", &numeroConta);
+
+    int i;
+    for (i = 0; i < MAX_CONTAS && contas[i] != NULL; i++)
+    {
+        if (contas[i]->numero_conta == numeroConta)
+        {
+            printf("Digite o valor da transferência: ");
+            scanf("%lf", &valor);
+
+            // Validar o valor da transferência
+            if (valor > 0 && valor <= contas[i]->saldo)
+            {
+                contas[i]->saldo -= valor;
+                contas[i] 
+                printf("Transferência realizada com sucesso!\n");
+            }
+            else if (valor <= 0)
+            {
+                printf("Erro no valor de transferência. O valor deve ser maior que zero.\n");
+            }
+            else
+            {
+                printf("Saldo insuficiente para realizar a transferência.\n");
+            }
+
+            return; // Sair da função depois de realizar a transferência
+        }
+    }
+
+    // Se a conta não for encontrada
+    printf("Conta não encontrada. Verifique o número da conta e tente novamente.\n");
 }
+
 
 int main()
 {
@@ -286,15 +301,11 @@ int main()
     case 4:
       printf("4 - COLOQUE SUA FUNCAO\n");
       break;
-    case 5: ;
-      int numero_conta_remover;
-      printf("Digite o número da conta a ser removida: ");
-      scanf("%d", &numero_conta_remover);
-      removerConta(numero_conta_remover);
-
+    case 5:
+      printf("5 - COLOQUE SUA FUNCAO\n");
       break;
     case 6:
-      printf("6 - COLOQUE SUA FUNCAO\n");
+      transferirvalor();
       break;
     case 7:
       printf("7 - COLOQUE SUA FUNCAO\n");

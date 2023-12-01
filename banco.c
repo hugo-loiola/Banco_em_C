@@ -38,7 +38,7 @@ ContaBancaria *criarConta()
   }
 
   // Solicitar informações ao usuário
-  printf("Digite o número da conta: ");
+  printf("Digite o numero da conta: ");
   scanf("%d", &nova_conta->numero_conta);
 
   printf("Digite o nome do titular: ");
@@ -75,6 +75,33 @@ void mostrarSaldoTotal()
   printf("Saldo total de todas as contas: %.2lf\n", saldoTotal);
 }
 
+// Função para editar informações do titular de uma conta
+void editarInformacoes(ContaBancaria *conta)
+{
+    // Solicitar novas informações ao usuário
+    printf("Digite o novo nome do titular: ");
+    scanf("%s", conta->nome_titular);
+
+    printf("Digite o novo saldo: ");
+    scanf("%lf", &conta->saldo);
+
+    printf("Informacoes da conta atualizadas com sucesso!\n");
+}
+
+// Função para encontrar uma conta pelo número
+ContaBancaria *encontrarConta(int numeroConta)
+{
+    for (int i = 0; i < MAX_CONTAS && contas[i] != NULL; i++)
+    {
+        if (contas[i]->numero_conta == numeroConta)
+        {
+            return contas[i];
+        }
+    }
+    return NULL; // Retorna NULL se a conta não for encontrada
+}
+
+
 void listarContas()
 {
   printf("\n------------ LISTA DE CONTAS ------------\n");
@@ -95,7 +122,7 @@ void depositar()
   int numeroConta;
   double valor;
 
-  printf("Digite o número da conta para depósito: ");
+  printf("Digite o numero da conta para depósito: ");
   scanf("%d", &numeroConta);
 
   // Procurar a conta pelo número
@@ -111,11 +138,11 @@ void depositar()
           if (valor > 0)
           {
               contas[i]->saldo += valor;
-              printf("Depósito realizado com sucesso!\n");
+              printf("Deposito realizado com sucesso!\n");
           }
           else
           {
-              printf("Valor de depósito inválido. O valor deve ser maior que zero.\n");
+              printf("Valor de deposito invalido. O valor deve ser maior que zero.\n");
           }
 
           return; // Sair da função depois de realizar o depósito
@@ -123,7 +150,7 @@ void depositar()
   }
 
     // Se a conta não for encontrada
-    printf("Conta não encontrada. Verifique o número da conta e tente novamente.\n");
+    printf("Conta nao encontrada. Verifique o numero da conta e tente novamente.\n");
 }
 
 // Função para sacar de uma conta
@@ -132,7 +159,7 @@ void sacar()
     int numeroConta;
     double valor;
 
-    printf("Digite o número da conta para saque: ");
+    printf("Digite o numero da conta para saque: ");
     scanf("%d", &numeroConta);
 
     // Procurar a conta pelo número
@@ -152,7 +179,7 @@ void sacar()
             }
             else if (valor <= 0)
             {
-                printf("Valor de saque inválido. O valor deve ser maior que zero.\n");
+                printf("Valor de saque invalido. O valor deve ser maior que zero.\n");
             }
             else
             {
@@ -164,7 +191,7 @@ void sacar()
     }
 
     // Se a conta não for encontrada
-    printf("Conta não encontrada. Verifique o número da conta e tente novamente.\n");
+    printf("Conta nao encontrada. Verifique o numero da conta e tente novamente.\n");
 }
 
 // Função para exibir um menu de operações em uma conta (depósito ou saque)
@@ -173,9 +200,9 @@ void depositarSacar()
 {
     int escolha;
     printf("\n------------ MENU DE OPERAÇÕES EM CONTA ------------\n");
-    printf("1 - Depósito\n");
+    printf("1 - Deposito\n");
     printf("2 - Saque\n");
-    printf("Escolha uma opção: ");
+    printf("Escolha uma opcao: ");
     scanf("%d", &escolha);
 
     switch (escolha)
@@ -187,7 +214,7 @@ void depositarSacar()
         sacar();
         break;
     default:
-        printf("Opção inválida.\n");
+        printf("Opção invalida.\n");
     }
 }
 
@@ -208,7 +235,28 @@ void removerConta(int numeroConta)
   }
 
   // Se chegou aqui, a conta não foi encontrada
-  printf("Conta não encontrada. Verifique o número da conta.\n");
+  printf("Conta nao encontrada. Verifique o número da conta.\n");
+}
+
+// Função para salvar dados das contas em um arquivo
+void salvarDados()
+{
+    FILE *arquivo;
+    arquivo = fopen("dados_contas.txt", "w");
+
+    if (arquivo == NULL)
+    {
+        fprintf(stderr, "Erro ao abrir o arquivo para escrita.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    for (int i = 0; i < MAX_CONTAS && contas[i] != NULL; i++)
+    {
+        fprintf(arquivo, "%d %s %.2lf\n", contas[i]->numero_conta, contas[i]->nome_titular, contas[i]->saldo);
+    }
+
+    fclose(arquivo);
+    printf("Dados das contas salvos no arquivo com sucesso!\n");
 }
 
 int main()
@@ -258,7 +306,7 @@ int main()
     printf("6 - Transferir valor de uma conta para outra\n");
     printf("7 - Salvar dados de uma conta em um arquivo\n");
     printf("8 - SAIR\n");
-    printf("\nEscolha uma opção: ");
+    printf("\nEscolha uma opcao: ");
     scanf("%d", &opcao);
 
     switch (opcao)
@@ -294,11 +342,29 @@ int main()
       break;
 
     case 4:
-      printf("4 - COLOQUE SUA FUNCAO\n");
-      break;
+{
+    int numeroContaEditar;
+    printf("Digite o numero da conta que deseja editar: ");
+    scanf("%d", &numeroContaEditar);
+
+    // Encontrar a conta pelo número
+    ContaBancaria *contaParaEditar = encontrarConta(numeroContaEditar);
+
+    if (contaParaEditar != NULL)
+    {
+        // Chamar a função para editar as informações
+        editarInformacoes(contaParaEditar);
+    }
+    else
+    {
+        printf("Conta nao encontrada. Verifique o numero da conta e tente novamente.\n");
+    }
+
+    break;
+}
     case 5: ;
       int numero_conta_remover;
-      printf("Digite o número da conta a ser removida: ");
+      printf("Digite o numero da conta a ser removida: ");
       scanf("%d", &numero_conta_remover);
       removerConta(numero_conta_remover);
 
@@ -307,10 +373,10 @@ int main()
       printf("6 - COLOQUE SUA FUNCAO\n");
       break;
     case 7:
-      printf("7 - COLOQUE SUA FUNCAO\n");
+      salvarDados();
       break;
     case 8:
-      printf("Fim da operação %s\n", BancoNome);
+      printf("FIM da operacao %s\n", BancoNome);
 
       for (int i = 0; i < MAX_CONTAS; i++)
       {
@@ -324,7 +390,7 @@ int main()
 
       exit(0);
     default:
-      printf("Opçao incorreta. Pressione Enter para continuar...");
+      printf("Opcao incorreta. Pressione Enter para continuar...");
       getchar();
       getchar();
       break;

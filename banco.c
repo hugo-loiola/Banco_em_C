@@ -56,6 +56,10 @@ void mostrarSaldoTotal()
   {
     printf("Conta: %d saldo: %.2lf\n", contas[i]->numero_conta, contas[i]->saldo);
   }
+  for (int i = 0; i < MAX_CONTAS && contas[i] != NULL; i++)
+  {
+    saldoTotal += contas[i]->saldo;
+  }
 
   // Exibir o saldo total
   printf("Saldo total de todas as contas: %.2lf\n", saldoTotal);

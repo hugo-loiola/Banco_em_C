@@ -159,6 +159,7 @@ void sacar()
 
 // Função para exibir um menu de operações em uma conta (depósito ou saque)
 void depositarSacar()
+
 {
     int escolha;
     printf("\n------------ MENU DE OPERAÇÕES EM CONTA ------------\n");
@@ -178,6 +179,26 @@ void depositarSacar()
     default:
         printf("Opção inválida.\n");
     }
+}
+
+// Função para remover uma conta bancária
+void removerConta(int numeroConta)
+{
+  // Procurar a conta com o número especificado
+  for (int i = 0; i < MAX_CONTAS && contas[i] != NULL; i++)
+  {
+    if (contas[i]->numero_conta == numeroConta)
+    {
+      // Encontrou a conta, liberar memória e remover
+      free(contas[i]);
+      contas[i] = NULL;
+      printf("Conta removida com sucesso!\n");
+      return;
+    }
+  }
+
+  // Se chegou aqui, a conta não foi encontrada
+  printf("Conta não encontrada. Verifique o número da conta.\n");
 }
 
 int main()
@@ -265,8 +286,12 @@ int main()
     case 4:
       printf("4 - COLOQUE SUA FUNCAO\n");
       break;
-    case 5:
-      printf("5 - COLOQUE SUA FUNCAO\n");
+    case 5: ;
+      int numero_conta_remover;
+      printf("Digite o número da conta a ser removida: ");
+      scanf("%d", &numero_conta_remover);
+      removerConta(numero_conta_remover);
+
       break;
     case 6:
       printf("6 - COLOQUE SUA FUNCAO\n");

@@ -6,6 +6,14 @@
 #define SENHA_PADRAO "money"
 #define MAX_CONTAS 10 // Máximo de contas
 
+void clean_stdin(void)
+{
+    int c;
+    do {
+        c = getchar();
+    } while (c != '\n' && c != EOF);
+}
+
 // Estrutura para representar uma conta bancária
 typedef struct
 {
@@ -34,7 +42,9 @@ ContaBancaria *criarConta()
   scanf("%d", &nova_conta->numero_conta);
 
   printf("Digite o nome do titular: ");
-  scanf("%s", nova_conta->nome_titular);
+  clean_stdin();
+  fgets(nova_conta->nome_titular, 30,stdin);
+  nova_conta->nome_titular[strcspn(nova_conta->nome_titular, "\n")] = 0;
 
   printf("Digite o saldo inicial: ");
   scanf("%lf", &nova_conta->saldo);
@@ -56,7 +66,11 @@ void mostrarSaldoTotal()
   {
     printf("Conta: %d saldo: %.2lf\n", contas[i]->numero_conta, contas[i]->saldo);
   }
-
+  for (int i = 0; i < MAX_CONTAS && contas[i] != NULL; i++)
+  {
+    saldoTotal += contas[i]->saldo;
+  }
+  
   // Exibir o saldo total
   printf("Saldo total de todas as contas: %.2lf\n", saldoTotal);
 }

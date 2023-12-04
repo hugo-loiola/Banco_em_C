@@ -44,7 +44,7 @@ ContaBancaria *criarConta()
 
     printf("Digite o nome do titular: ");
     clean_stdin();
-    fgets(nova_conta->nome_titular, 30, stdin);
+    fgets(nova_conta->nome_titular, 50, stdin);
     nova_conta->nome_titular[strcspn(nova_conta->nome_titular, "\n")] = 0;
 
     printf("Digite o saldo inicial: R$");
@@ -75,7 +75,7 @@ void mostrarSaldoTotal()
     }
 
     // Exibir o saldo total
-    printf("Saldo total de todas as contas: %.2lf\n", saldoTotal);
+    printf("Saldo total de todas as contas: R$%.2lf\n", saldoTotal);
 }
 
 // Função para editar informações do titular de uma conta
@@ -83,12 +83,18 @@ void editarInformacoes(ContaBancaria *conta)
 {
     // Solicitar novas informações ao usuário
     printf("Digite o novo nome do titular: ");
-    scanf("%s", conta->nome_titular);
+    clean_stdin();
+    fgets(conta->nome_titular, 50, stdin);
+    conta->nome_titular[strcspn(conta->nome_titular, "\n")] = 0;
 
-    printf("Digite o novo saldo: ");
+    printf("Digite o novo saldo: R$");
     scanf("%lf", &conta->saldo);
 
+    printf("\n");
+    printf("----------------------------\n");
     printf("Informacoes da conta atualizadas com sucesso!\n");
+    printf("----------------------------\n");
+    printf("\n");
 }
 
 // Função para encontrar uma conta pelo número
@@ -126,11 +132,19 @@ void depositar()
             if (valor > 0)
             {
                 contas[i]->saldo += valor;
+                printf("\n");
+                printf("----------------------------\n");
                 printf("Deposito realizado com sucesso!\n");
+                printf("----------------------------\n");
+                printf("\n");
             }
             else
             {
+                printf("\n");
+                printf("----------------------------\n");
                 printf("Valor de deposito invalido. O valor deve ser maior que zero.\n");
+                printf("----------------------------\n");
+                printf("\n");
             }
 
             return; // Sair da função depois de realizar o depósito
@@ -138,7 +152,11 @@ void depositar()
     }
 
     // Se a conta não for encontrada
+    printf("\n");
+    printf("----------------------------\n");
     printf("Conta nao encontrada. Verifique o numero da conta e tente novamente.\n");
+    printf("----------------------------\n");
+    printf("\n");
 }
 
 // Função para sacar de uma conta
@@ -147,7 +165,7 @@ void sacar()
     int numeroConta;
     double valor;
 
-    printf("Digite o numero da conta para saque: R$");
+    printf("Digite o numero da conta para saque: ");
     scanf("%d", &numeroConta);
 
     // Procurar a conta pelo número
@@ -163,15 +181,27 @@ void sacar()
             if (valor > 0 && valor <= contas[i]->saldo)
             {
                 contas[i]->saldo -= valor;
+                printf("\n");
+                printf("----------------------------\n");
                 printf("Saque realizado com sucesso!\n");
+                printf("----------------------------\n");
+                printf("\n");
             }
             else if (valor <= 0)
             {
+                printf("\n");
+                printf("----------------------------\n");
                 printf("Valor de saque invalido. O valor deve ser maior que zero.\n");
+                printf("----------------------------\n");
+                printf("\n");
             }
             else
             {
+                printf("\n");
+                printf("----------------------------\n");
                 printf("Saldo insuficiente para realizar o saque.\n");
+                printf("----------------------------\n");
+                printf("\n");
             }
 
             return; // Sair da função depois de realizar o saque
@@ -179,7 +209,11 @@ void sacar()
     }
 
     // Se a conta não for encontrada
+    printf("\n");
+    printf("----------------------------\n");
     printf("Conta nao encontrada. Verifique o numero da conta e tente novamente.\n");
+    printf("----------------------------\n");
+    printf("\n");
 }
 
 // Função para exibir um menu de operações em uma conta (depósito ou saque)
@@ -228,8 +262,11 @@ void removerConta(int numeroConta)
     }
 
     // Se chegou aqui, a conta não foi encontrada
+    printf("\n");
     printf("----------------------------\n");
     printf("Conta nao encontrada. Verifique o número da conta.\n");
+    printf("----------------------------\n");
+    printf("\n");
 }
 
 // Função para salvar dados das contas em um arquivo
@@ -250,7 +287,11 @@ void salvarDados()
     }
 
     fclose(arquivo);
+    printf("\n");
+    printf("----------------------------\n");
     printf("Dados das contas salvos no arquivo com sucesso!\n");
+    printf("----------------------------\n");
+    printf("\n");
 }
 
 int main()
@@ -319,12 +360,19 @@ int main()
             if (i < MAX_CONTAS)
             {
                 contas[i] = minha_conta;
-                printf("------------------\n");
+                printf("\n");
+                printf("----------------------------\n");
                 printf("Conta criada com sucesso!\n");
+                printf("----------------------------\n");
+                printf("\n");
             }
             else
             {
+                printf("\n");
+                printf("----------------------------\n");
                 printf("Limite de contas atingido. Nao eh possivel criar mais contas.\n");
+                printf("----------------------------\n");
+                printf("\n");
 
                 free(minha_conta); // Liberar memória, se possível
             }
@@ -352,7 +400,11 @@ int main()
             }
             else
             {
+                printf("\n");
+                printf("----------------------------\n");
                 printf("Conta nao encontrada. Verifique o numero da conta e tente novamente.\n");
+                printf("----------------------------\n");
+                printf("\n");
             }
 
             break;

@@ -4,9 +4,9 @@
 #include <locale.h>
 
 #define SENHA_PADRAO "money"
-#define MAX_CONTAS 10 // Máximo de contas
+#define MAX_CONTAS 10 // MÃ¡ximo de contas
 
-// Estrutura para representar uma conta bancária
+// Estrutura para representar uma conta bancÃ¡ria
 typedef struct
 {
     int numero_conta;
@@ -16,21 +16,21 @@ typedef struct
 
 ContaBancaria **contas;
 
-// Função para criar uma nova conta bancária
+// FunÃ§Ã£o para criar uma nova conta bancÃ¡ria
 ContaBancaria *criarConta()
 {
-    // Alocar memória para a estrutura da conta
+    // Alocar memÃ³ria para a estrutura da conta
     ContaBancaria *nova_conta = (ContaBancaria *)malloc(sizeof(ContaBancaria));
 
-    // Verificar se a alocação foi bem-sucedida
+    // Verificar se a alocaÃ§Ã£o foi bem-sucedida
     if (nova_conta == NULL)
     {
         fprintf(stderr, "Erro ao alocar memoria para a conta bancaria\n");
         exit(EXIT_FAILURE);
     }
 
-    // Solicitar informaÃ§Ãµes ao usuÃ¡rio
-    printf("Digite o número da conta: ");
+    // Solicitar informaÃÂ§ÃÂµes ao usuÃÂ¡rio
+    printf("Digite o nÃºmero da conta: ");
     scanf("%d", &nova_conta->numero_conta);
 
     printf("Digite o nome do titular: ");
@@ -43,9 +43,9 @@ ContaBancaria *criarConta()
     return nova_conta;
 }
 
-// Função para mostrar o saldo total de todas as contas
+// FunÃ§Ã£o para mostrar o saldo total de todas as contas
 
-// No seu switch-case, você pode chamar essa funÃ§Ã£o quando o usuÃ¡rio escolher a opção 3
+// No seu switch-case, vocÃª pode chamar essa funÃÂ§ÃÂ£o quando o usuÃÂ¡rio escolher a opÃ§Ã£o 3
 
 void mostrarSaldoTotal()
 {
@@ -73,16 +73,16 @@ void listarContas()
     }
 }
 
-// Função para depositar em uma conta
+// FunÃ§Ã£o para depositar em uma conta
 void depositar()
 {
     int numeroConta;
     double valor;
 
-    printf("Digite o número da conta para Depósito: ");
+    printf("Digite o nÃºmero da conta para DepÃ³sito: ");
     scanf("%d", &numeroConta);
 
-    // Procurar a conta pelo número
+    // Procurar a conta pelo nÃºmero
     int i;
     for (i = 0; i < MAX_CONTAS && contas[i] != NULL; i++)
     {
@@ -91,35 +91,35 @@ void depositar()
             printf("Digite o valor a ser depositado: ");
             scanf("%lf", &valor);
 
-            // Validar o valor do Depósito
+            // Validar o valor do DepÃ³sito
             if (valor > 0)
             {
                 contas[i]->saldo += valor;
-                printf("Depósito realizado com sucesso!\n");
+                printf("DepÃ³sito realizado com sucesso!\n");
             }
             else
             {
-                printf("Valor de depósito inválido. O valor deve ser maior que zero.\n");
+                printf("Valor de depÃ³sito invÃ¡lido. O valor deve ser maior que zero.\n");
             }
 
-            return; // Sair da funÃ§Ã£o depois de realizar o Depósito
+            return; // Sair da funÃÂ§ÃÂ£o depois de realizar o DepÃ³sito
         }
     }
 
-    // Se a conta nÃ£o for encontrada
-    printf("Conta nÃ£o encontrada. Verifique o número da conta e tente novamente.\n");
+    // Se a conta nÃÂ£o for encontrada
+    printf("Conta nÃÂ£o encontrada. Verifique o nÃºmero da conta e tente novamente.\n");
 }
 
-// Função para sacar de uma conta
+// FunÃ§Ã£o para sacar de uma conta
 void sacar()
 {
     int numeroConta;
     double valor;
 
-    printf("Digite o número da conta para saque: ");
+    printf("Digite o nÃºmero da conta para saque: ");
     scanf("%d", &numeroConta);
 
-    // Procurar a conta pelo número
+    // Procurar a conta pelo nÃºmero
     int i;
     for (i = 0; i < MAX_CONTAS && contas[i] != NULL; i++)
     {
@@ -136,29 +136,29 @@ void sacar()
             }
             else if (valor <= 0)
             {
-                printf("Valor de saque inválido. O valor deve ser maior que zero.\n");
+                printf("Valor de saque invÃ¡lido. O valor deve ser maior que zero.\n");
             }
             else
             {
                 printf("Saldo insuficiente para realizar o saque.\n");
             }
 
-            return; // Sair da função depois de realizar o saque
+            return; // Sair da funÃ§Ã£o depois de realizar o saque
         }
     }
 
-    // Se a conta não for encontrada
-    printf("Conta nÃ£o encontrada. Verifique o número da conta e tente novamente.\n");
+    // Se a conta nÃ£o for encontrada
+    printf("Conta nÃÂ£o encontrada. Verifique o nÃºmero da conta e tente novamente.\n");
 }
 
-// Função para exibir um menu de operaÃ§Ãµes em uma conta (Depósito ou saque)
+// FunÃ§Ã£o para exibir um menu de operaÃÂ§ÃÂµes em uma conta (DepÃ³sito ou saque)
 void depositarSacar()
 {
     int escolha;
-    printf("\n------------ MENU DE OPERAÇÕES EM CONTA ------------\n");
-    printf("1 - Depósito\n");
+    printf("\n------------ MENU DE OPERAÃÃES EM CONTA ------------\n");
+    printf("1 - DepÃ³sito\n");
     printf("2 - Saque\n");
-    printf("Escolha uma opÃ§Ã£o: ");
+    printf("Escolha uma opÃÂ§ÃÂ£o: ");
     scanf("%d", &escolha);
 
     switch (escolha)
@@ -170,7 +170,7 @@ void depositarSacar()
         sacar();
         break;
     default:
-        printf("Opção inválida.\n");
+        printf("OpÃ§Ã£o invÃ¡lida.\n");
     }
 }
 
@@ -179,33 +179,33 @@ void trasnferirValor()
     double valor;
     int numeroConta, numeroConta2;
 
-    printf("Digite o número da conta remetente: ");
+    printf("Digite o nÃºmero da conta remetente: ");
     scanf("%d", &numeroConta);
     for (int i = 0; i < MAX_CONTAS && contas[i] != NULL; i++)
     {
         if (contas[i]->numero_conta == numeroConta)
         {
-            printf("Digite o valor da Transferência: \n");
+            printf("Digite o valor da TransferÃªncia: \n");
             scanf("%lf", &valor);
 
-            // Validar o valor do saque
+            // Validar o valor da transferência
             if (valor > 0 && valor <= contas[i]->saldo)
             {
                 contas[i]->saldo -= valor;
-                printf("Transação em andamento, aguarde!\n");
+                printf("TransaÃ§Ã£o em andamento, aguarde!\n");
             }
             else if (valor <= 0)
             {
-                printf("Valor de saque inválido. O valor deve ser maior que zero.\n");
+                printf("Valor de saque invÃ¡lido. O valor deve ser maior que zero.\n");
             }
             else
             {
-                printf("Saldo insuficiente para realizar a Transferência.\n");
+                printf("Saldo insuficiente para realizar a TransferÃªncia.\n");
             }
         }
     }
 
-    printf("Digite o número da conta do destinatário: ");
+    printf("Digite o nÃºmero da conta do destinatÃ¡rio: ");
     scanf("%d", &numeroConta2);
     for (int i = 0; i < MAX_CONTAS && contas[i] != NULL; i++)
     {
@@ -213,7 +213,7 @@ void trasnferirValor()
         {
             printf("Valor a ser recebido: %.2lf\n", valor);
 
-            // Validar o valor do Depósito
+            // Validar o valor da transferência recebida pelo destinatário
             if (valor > 0)
             {
                 contas[i]->saldo += valor;
@@ -221,16 +221,16 @@ void trasnferirValor()
             }
             else
             {
-                printf("Erro no valor de Transferência. O valor deve ser maior que zero.\n");
+                printf("Erro no valor de TransferÃªncia. O valor deve ser maior que zero.\n");
             }
 
             return printf("----------Transferencia Realizada com Sucesso----------\n");
-            // Sair da funÃ§Ã£o depois de realizar o Depósito
+            // Sair da função depois da transferência ser concluída
         }
     }
 
-    // Se a conta nÃ£o for encontrada
-    printf("Conta nÃ£o encontrada. Verifique o número da conta e tente novamente.\n");
+    // Se a conta nÃÂ£o for encontrada
+    printf("Conta nÃÂ£o encontrada. Verifique o nÃºmero da conta e tente novamente.\n");
 }
 
 int main()
@@ -280,22 +280,22 @@ int main()
         printf("6 - Transferir valor de uma conta para outra\n");
         printf("7 - Salvar dados de uma conta em um arquivo\n");
         printf("8 - SAIR\n");
-        printf("\nEscolha uma opção: ");
+        printf("\nEscolha uma opÃ§Ã£o: ");
         scanf("%d", &opcao);
 
         switch (opcao)
         {
         case 1:;
-            // Exibir informações da conta
+            // Exibir informaÃ§Ãµes da conta
             ContaBancaria *minha_conta = criarConta();
 
-            // Encontrar um espaço vazio no array
+            // Encontrar um espaÃ§o vazio no array
             int i;
             for (i = 0; i < MAX_CONTAS && contas[i] != NULL; i++)
             {
             }
 
-            // Checar se o número de contas
+            // Checar se o nÃºmero de contas
             if (i < MAX_CONTAS)
             {
                 contas[i] = minha_conta;
@@ -305,7 +305,7 @@ int main()
             {
                 printf("Limite de contas atingido. Nao eh possivel criar mais contas.\n");
 
-                free(minha_conta); // Liberar memória, se possÃ­vel
+                free(minha_conta); // Liberar memÃ³ria, se possÃÂ­vel
             }
             break;
         case 2:
@@ -328,7 +328,7 @@ int main()
             printf("7 - COLOQUE SUA FUNCAO\n");
             break;
         case 8:
-            printf("Fim da operação %s\n", BancoNome);
+            printf("Fim da operaÃ§Ã£o %s\n", BancoNome);
 
             for (int i = 0; i < MAX_CONTAS; i++)
             {
@@ -339,12 +339,12 @@ int main()
         case 9:;
             listarContas();
             break;
-            // Liberar memoria quando o código terminar
+            // Liberar memoria quando o cÃ³digo terminar
             free(contas);
 
             exit(0);
         default:
-            printf("Opção incorreta. Pressione Enter para continuar...");
+            printf("OpÃ§Ã£o incorreta. Pressione Enter para continuar...");
             getchar();
             getchar();
             break;

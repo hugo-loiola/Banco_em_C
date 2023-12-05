@@ -47,7 +47,7 @@ ContaBancaria *criarConta()
     fgets(nova_conta->nome_titular, 50, stdin);
     nova_conta->nome_titular[strcspn(nova_conta->nome_titular, "\n")] = 0;
 
-    printf("Digite o saldo inicial: R$");
+    printf("Digite o saldo inicial: R$ ");
     scanf("%lf", &nova_conta->saldo);
 
     // Retornar o ponteiro para a nova conta
@@ -75,7 +75,7 @@ void mostrarSaldoTotal()
     }
 
     // Exibir o saldo total
-    printf("Saldo total de todas as contas: R$%.2lf\n", saldoTotal);
+    printf("Saldo total de todas as contas: R$ %.2lf\n", saldoTotal);
 }
 
 // Função para editar informações do titular de uma conta
@@ -87,7 +87,7 @@ void editarInformacoes(ContaBancaria *conta)
     fgets(conta->nome_titular, 50, stdin);
     conta->nome_titular[strcspn(conta->nome_titular, "\n")] = 0;
 
-    printf("Digite o novo saldo: R$");
+    printf("Digite o novo saldo: R$ ");
     scanf("%lf", &conta->saldo);
 
     printf("\n");
@@ -116,7 +116,7 @@ void depositar()
     int numeroConta;
     double valor;
 
-    printf("Digite o numero da conta para depósito: ");
+    printf("Digite o numero da conta para deposito: ");
     scanf("%d", &numeroConta);
 
     // Procurar a conta pelo número
@@ -125,7 +125,7 @@ void depositar()
     {
         if (contas[i]->numero_conta == numeroConta)
         {
-            printf("Digite o valor a ser depositado: R$");
+            printf("Digite o valor a ser depositado: R$ ");
             scanf("%lf", &valor);
 
             // Validar o valor do depósito
@@ -174,7 +174,7 @@ void sacar()
     {
         if (contas[i]->numero_conta == numeroConta)
         {
-            printf("Digite o valor a ser sacado: R$");
+            printf("Digite o valor a ser sacado: R$ ");
             scanf("%lf", &valor);
 
             // Validar o valor do saque
@@ -224,7 +224,7 @@ void depositarSacar()
     while (escolha != 3)
     {
 
-        printf("\n------------ MENU DE OPERAÇÕES EM CONTA ------------\n");
+        printf("\n------------ MENU DE OPERACOES EM CONTA ------------\n");
         printf("1 - Deposito\n");
         printf("2 - Saque\n");
         printf("3 - Sair\n");
@@ -240,7 +240,7 @@ void depositarSacar()
             sacar();
             break;
         default:
-            printf("Opção invalida.\n");
+            printf("Opcao invalida.\n");
         }
     }
 }
@@ -264,9 +264,69 @@ void removerConta(int numeroConta)
     // Se chegou aqui, a conta não foi encontrada
     printf("\n");
     printf("----------------------------\n");
-    printf("Conta nao encontrada. Verifique o número da conta.\n");
+    printf("Conta nao encontrada. Verifique o numero da conta.\n");
     printf("----------------------------\n");
     printf("\n");
+}
+
+// função para transferir valor
+void trasnferirValor()
+{
+    double valor;
+    int numeroConta, numeroConta2;
+
+    printf("Digite o numero da conta remetente: ");
+    scanf("%d", &numeroConta);
+    for (int i = 0; i < MAX_CONTAS && contas[i] != NULL; i++)
+    {
+        if (contas[i]->numero_conta == numeroConta)
+        {
+            printf("Digite o valor da Transferencia: \n");
+            scanf("%lf", &valor);
+
+            // Validar o valor da transferência
+            if (valor > 0 && valor <= contas[i]->saldo)
+            {
+                contas[i]->saldo -= valor;
+                printf("Transacao em andamento, aguarde!\n");
+            }
+            else if (valor <= 0)
+            {
+                printf("Valor de saque invalido. O valor deve ser maior que zero.\n");
+            }
+            else
+            {
+                printf("Saldo insuficiente para realizar a Transferencia.\n");
+            }
+        }
+    }
+
+    printf("Digite o numero da conta do destinatario: ");
+    scanf("%d", &numeroConta2);
+    for (int i = 0; i < MAX_CONTAS && contas[i] != NULL; i++)
+    {
+        if (contas[i]->numero_conta == numeroConta2)
+        {
+            printf("Valor a ser recebido: %.2lf\n", valor);
+
+            // Validar o valor da transferência recebida pelo destinatário
+            if (valor > 0)
+            {
+                contas[i]->saldo += valor;
+                printf("Saldo creditado!\n");
+            }
+            else
+            {
+                printf("Erro no valor de Transferencia. O valor deve ser maior que zero.\n");
+            }
+
+            return printf("----------Transferência Realizada com Sucesso----------\n");
+            // Sair da função depois da transferência ser concluída
+        }
+    }
+
+    // Se a conta não for encontrada
+    printf("Conta nao encontrada. Verifique o numero da conta e tente novamente.\n");
 }
 
 // Função para salvar dados das contas em um arquivo
@@ -417,7 +477,7 @@ int main()
 
             break;
         case 6:
-            printf("6 - COLOQUE SUA FUNCAO\n");
+            trasnferirValor();
             break;
         case 7:
             salvarDados();

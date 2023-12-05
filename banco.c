@@ -354,6 +354,33 @@ void salvarDados()
     printf("\n");
 }
 
+// função voltar ao menu ou sair
+void realizarAcao()
+{
+    int escolha;
+    do
+    {
+        // Adicione aqui a chamada para a ação que deseja realizar
+        printf("\nDeseja voltar ao menu?\n");
+        printf("1 - Sim\n");
+        printf("2 - Nao\n");
+        printf("Escolha: ");
+        scanf("%d", &escolha);
+
+        switch (escolha)
+        {
+        case 1:
+            // Voltar ao menu
+            break;
+        case 2:
+            printf("Fim da operacao.\n");
+            exit(0); // Terminar o programa
+        default:
+            printf("Opcao invalida. Tente novamente.\n");
+        }
+    } while (escolha != 1);
+}
+
 int main()
 {
     char BancoNome[] = "BANCO MASSA DE MAIS VEI";
@@ -436,12 +463,15 @@ int main()
 
                 free(minha_conta); // Liberar memória, se possível
             }
+            realizarAcao();
             break;
         case 2:
             depositarSacar();
+            realizarAcao();
             break;
         case 3:
             mostrarSaldoTotal();
+            realizarAcao();
             break;
 
         case 4:
@@ -466,7 +496,7 @@ int main()
                 printf("----------------------------\n");
                 printf("\n");
             }
-
+            realizarAcao();
             break;
         }
         case 5:;
@@ -474,13 +504,15 @@ int main()
             printf("Digite o numero da conta a ser removida: ");
             scanf("%d", &numero_conta_remover);
             removerConta(numero_conta_remover);
-
+            realizarAcao();
             break;
         case 6:
             trasnferirValor();
+            realizarAcao();
             break;
         case 7:
             salvarDados();
+            realizarAcao();
             break;
         case 8:;
             printf("--------------\n");

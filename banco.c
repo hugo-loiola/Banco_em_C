@@ -270,64 +270,66 @@ void removerConta(int numeroConta)
 }
 
 // função para transferir valor
-void trasnferirValor()
+void transferirValor()
 {
+    int origemConta, destinoConta;
     double valor;
-    int numeroConta, numeroConta2;
 
-    printf("Digite o numero da conta remetente: ");
-    scanf("%d", &numeroConta);
-    for (int i = 0; i < MAX_CONTAS && contas[i] != NULL; i++)
+    printf("Digite o numero da conta de origem: ");
+    scanf("%d", &origemConta);
+
+    // Encontrar a conta de origem pelo número
+    ContaBancaria *contaOrigem = encontrarConta(origemConta);
+
+    if (contaOrigem == NULL)
     {
-        if (contas[i]->numero_conta == numeroConta)
-        {
-            printf("Digite o valor da Transferencia: \n");
-            scanf("%lf", &valor);
-
-            // Validar o valor da transferência
-            if (valor > 0 && valor <= contas[i]->saldo)
-            {
-                contas[i]->saldo -= valor;
-                printf("Transacao em andamento, aguarde!\n");
-            }
-            else if (valor <= 0)
-            {
-                printf("Valor de saque invalido. O valor deve ser maior que zero.\n");
-            }
-            else
-            {
-                printf("Saldo insuficiente para realizar a Transferencia.\n");
-            }
-        }
+        printf("\n----------------------------\n");
+        printf("Conta de origem nao encontrada. Verifique o numero da conta e tente novamente.\n");
+        printf("----------------------------\n\n");
+        return;
     }
 
-    printf("Digite o numero da conta do destinatario: ");
-    scanf("%d", &numeroConta2);
-    for (int i = 0; i < MAX_CONTAS && contas[i] != NULL; i++)
+    printf("Digite o numero da conta de destino: ");
+    scanf("%d", &destinoConta);
+
+    // Encontrar a conta de destino pelo número
+    ContaBancaria *contaDestino = encontrarConta(destinoConta);
+
+    if (contaDestino == NULL)
     {
-        if (contas[i]->numero_conta == numeroConta2)
-        {
-            printf("Valor a ser recebido: %.2lf\n", valor);
-
-            // Validar o valor da transferência recebida pelo destinatário
-            if (valor > 0)
-            {
-                contas[i]->saldo += valor;
-                printf("Saldo creditado!\n");
-            }
-            else
-            {
-                printf("Erro no valor de Transferencia. O valor deve ser maior que zero.\n");
-            }
-
-            return printf("----------Transferência Realizada com Sucesso----------\n");
-            // Sair da função depois da transferência ser concluída
-        }
+        printf("\n----------------------------\n");
+        printf("Conta de destino nao encontrada. Verifique o numero da conta e tente novamente.\n");
+        printf("----------------------------\n\n");
+        return;
     }
 
-    // Se a conta não for encontrada
-    printf("Conta nao encontrada. Verifique o numero da conta e tente novamente.\n");
+    printf("Digite o valor a ser transferido: R$");
+    scanf("%lf", &valor);
+
+    // Verificar se o saldo é suficiente para a transferência
+    if (valor > 0 && valor <= contaOrigem->saldo)
+    {
+        contaOrigem->saldo -= valor;
+        contaDestino->saldo += valor;
+
+        printf("\n----------------------------\n");
+        printf("Transferencia realizada com sucesso!\n");
+        printf("----------------------------\n\n");
+    }
+    else if (valor <= 0)
+    {
+        printf("\n----------------------------\n");
+        printf("Valor de transferencia invalido. O valor deve ser maior que zero.\n");
+        printf("----------------------------\n\n");
+    }
+    else
+    {
+        printf("\n----------------------------\n");
+        printf("Saldo insuficiente para realizar a transferencia.\n");
+        printf("----------------------------\n\n");
+    }
 }
+
 
 // Função para salvar dados das contas em um arquivo
 void salvarDados()
@@ -507,7 +509,7 @@ int main()
             realizarAcao();
             break;
         case 6:
-            trasnferirValor();
+            transferirValor();
             realizarAcao();
             break;
         case 7:

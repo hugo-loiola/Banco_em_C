@@ -60,7 +60,6 @@ void mostrarSaldoTotal()
 {
     double saldoTotal = 0.0;
 
-    // Iterar sobre todas as contas e somar os saldos
     printf("\n------------ LISTA DE CONTAS ------------\n");
     for (int i = 0; i < MAX_CONTAS && contas[i] != NULL; i++)
     {
@@ -68,15 +67,23 @@ void mostrarSaldoTotal()
         printf("Titular: %s\n", contas[i]->nome_titular);
         printf("Saldo: R$%.2lf\n", contas[i]->saldo);
         printf("-----------------------------\n");
-    }
-    for (int i = 0; i < MAX_CONTAS && contas[i] != NULL; i++)
-    {
+
         saldoTotal += contas[i]->saldo;
     }
 
-    // Exibir o saldo total
-    printf("Saldo total de todas as contas: R$ %.2lf\n", saldoTotal);
+    // Exibir o saldo total apenas se houver pelo menos uma conta
+    if (saldoTotal > 0.0)
+    {
+        printf("Saldo total de todas as contas: R$ %.2lf\n", saldoTotal);
+    }
+    else
+    {
+        printf("Nenhuma conta cadastrada ou todas as contas têm saldo zero.\n");
+    }
 }
+
+
+
 
 // Função para editar informações do titular de uma conta
 void editarInformacoes(ContaBancaria *conta)
@@ -248,25 +255,28 @@ void depositarSacar()
 // Função para remover uma conta bancária
 void removerConta(int numeroConta)
 {
-    // Procurar a conta com o número especificado
+    // Procurar a conta pelo número
     for (int i = 0; i < MAX_CONTAS && contas[i] != NULL; i++)
     {
         if (contas[i]->numero_conta == numeroConta)
         {
-            // Encontrou a conta, liberar memória e remover
+            // Liberar a memória da conta
             free(contas[i]);
-            contas[i] = NULL;
-            printf("Conta removida com sucesso!\n");
+
+            // Mover as contas subsequentes para preencher o espaço vazio
+            for (int j = i; j < MAX_CONTAS - 1; j++)
+            {
+                contas[j] = contas[j + 1];
+            }
+
+            // Marcar o último elemento do vetor como NULL
+            contas[MAX_CONTAS - 1] = NULL;
             return;
         }
     }
 
-    // Se chegou aqui, a conta não foi encontrada
-    printf("\n");
-    printf("----------------------------\n");
-    printf("Conta nao encontrada. Verifique o numero da conta.\n");
-    printf("----------------------------\n");
-    printf("\n");
+    // A conta não foi encontrada
+    printf("Conta nao encontrada.\n");
 }
 
 // função para transferir valor
@@ -330,6 +340,7 @@ void transferirValor()
     }
 }
 
+
 // Função para salvar dados das contas em um arquivo
 void salvarDados()
 {
@@ -374,8 +385,7 @@ void realizarAcao()
             // Voltar ao menu
             break;
         case 2:
-            printf("--------------\n");
-            printf("FIM da operacao %s\n");
+            printf("Fim da operacao.\n");
             exit(0); // Terminar o programa
         default:
             printf("Opcao invalida. Tente novamente.\n");
@@ -502,11 +512,14 @@ int main()
             break;
         }
         case 5:;
-            int numero_conta_remover;
+            int numeroConta;
+
+            // Ler o número da conta a ser removida
             printf("Digite o numero da conta a ser removida: ");
-            scanf("%d", &numero_conta_remover);
-            removerConta(numero_conta_remover);
-            realizarAcao();
+            scanf("%d", &numeroConta);
+
+            // Remover a conta
+            removerConta(numeroConta);
             break;
         case 6:
             transferirValor();

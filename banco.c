@@ -330,7 +330,6 @@ void transferirValor()
     }
 }
 
-
 // Função para salvar dados das contas em um arquivo
 void salvarDados()
 {
@@ -375,7 +374,8 @@ void realizarAcao()
             // Voltar ao menu
             break;
         case 2:
-            printf("Fim da operacao.\n");
+            printf("--------------\n");
+            printf("FIM da operacao %s\n");
             exit(0); // Terminar o programa
         default:
             printf("Opcao invalida. Tente novamente.\n");

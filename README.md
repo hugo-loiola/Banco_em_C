@@ -5,7 +5,7 @@
 </div>
 
 ### Tutorial
-
+- Utilize um compilador da linguagem C
 - Inicie o programa e coloque a senha do sistema.
 - Após isso selecione uma opção disponível no menu:
 
@@ -23,7 +23,7 @@
 
 > é recomendado que crie uma conta antes de fazer qualquer outra coisa.
 
-- Depois pode o sistema pode ser utilizado livremente.
+- Depois o sistema pode ser utilizado livremente.
 
 ### Alunos:
 

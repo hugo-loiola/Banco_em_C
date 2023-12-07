@@ -245,7 +245,6 @@ ContaBancaria *encontrarConta(int numeroConta)
     return NULL; // Retorna NULL se a conta não for encontrada
 }
 
-
 // Função para remover uma conta bancária
 void removerConta(int numeroConta)
 {
@@ -331,7 +330,6 @@ void removerConta(int numeroConta)
         printf("----------------------------\n");
     }
 }
-
 
 // função para transferir valor
 void transferirValor()
@@ -439,7 +437,7 @@ void realizarAcao()
             break;
         case 2:
             printf("--------------\n");
-            printf("FIM da operacao %s\n");
+            printf("FIM da operacao BANCO MASSA DE MAIS VEI.\n");
             exit(0); // Terminar o programa
         default:
             printf("Opcao invalida. Tente novamente.\n");
@@ -500,7 +498,7 @@ int main()
         switch (opcao)
         {
         case 1:;
-            // Exibir informações da conta
+            // Chamar a função
             ContaBancaria *minha_conta = criarConta();
 
             // Encontrar um espaço vazio no array
@@ -565,14 +563,14 @@ int main()
             break;
         }
         case 5:;
-             {
-             int numeroConta;
-             printf("Digite o numero da conta que deseja remover: ");
-             scanf("%d", &numeroConta);
-             removerConta(numeroConta);
-             realizarAcao();
-             break;
-             }
+            {
+                int numeroConta;
+                printf("Digite o numero da conta que deseja remover: ");
+                scanf("%d", &numeroConta);
+                removerConta(numeroConta);
+                realizarAcao();
+                break;
+            }
         case 6:
             transferirValor();
             realizarAcao();

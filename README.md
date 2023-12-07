@@ -1,17 +1,29 @@
-# Projeto-Final
+# Banco Massa de Mais Véi
 
-### 8 - Sistema de banco
+<div style="text-align:center">
+<img src=" https://captadores.org.br/wp-content/uploads/2016/05/bancos.png"/>
+</div>
 
-- Crie um sistema que registre contas bancárias e operações feitas entre elas, simulando a entrada e saída de
-  dinheiro. O menu deve permitir as seguintes ações:
+### Tutorial
 
-1. Criar nova conta;
-2. Depositar e sacar dinheiro em uma conta;
-3. Mostrar saldo total de cada conta;
-4. Editar informações do titular de uma conta;
-5. Remover conta;
-6. Transferir valor de uma conta para outra;
-7. Salvar informações de cada conta, incluindo saldo total, em um arquivo;
+- Inicie o programa e coloque a senha do sistema.
+- Após isso selecione uma opção disponível no menu:
+
+```
+------------ MENU ------------
+1 - Criar nova Conta
+2 - Depositar e sacar dinheiro em uma nova conta
+3 - Mostrar saldo total de cada conta
+4 - Editar informacoes do titular de uma conta
+5 - Remover conta
+6 - Transferir valor de uma conta para outra
+7 - Salvar dados de uma conta em um arquivo
+8 - SAIR
+```
+
+> é recomendado que crie uma conta antes de fazer qualquer outra coisa.
+
+- Depois pode o sistema pode ser utilizado livremente.
 
 ### Alunos:
 

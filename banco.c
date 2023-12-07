@@ -54,62 +54,6 @@ ContaBancaria *criarConta()
     return nova_conta;
 }
 
-// No seu switch-case, você pode chamar essa função quando o usuário escolher a opção 3
-
-void mostrarSaldoTotal()
-{
-    double saldoTotal = 0.0;
-
-    // Iterar sobre todas as contas e somar os saldos
-    printf("\n------------ LISTA DE CONTAS ------------\n");
-    for (int i = 0; i < MAX_CONTAS && contas[i] != NULL; i++)
-    {
-        printf("Conta: %d\n", contas[i]->numero_conta);
-        printf("Titular: %s\n", contas[i]->nome_titular);
-        printf("Saldo: R$%.2lf\n", contas[i]->saldo);
-        printf("-----------------------------\n");
-    }
-    for (int i = 0; i < MAX_CONTAS && contas[i] != NULL; i++)
-    {
-        saldoTotal += contas[i]->saldo;
-    }
-
-    // Exibir o saldo total
-    printf("Saldo total de todas as contas: R$ %.2lf\n", saldoTotal);
-}
-
-// Função para editar informações do titular de uma conta
-void editarInformacoes(ContaBancaria *conta)
-{
-    // Solicitar novas informações ao usuário
-    printf("Digite o novo nome do titular: ");
-    clean_stdin();
-    fgets(conta->nome_titular, 50, stdin);
-    conta->nome_titular[strcspn(conta->nome_titular, "\n")] = 0;
-
-    printf("Digite o novo saldo: R$ ");
-    scanf("%lf", &conta->saldo);
-
-    printf("\n");
-    printf("----------------------------\n");
-    printf("Informacoes da conta atualizadas com sucesso!\n");
-    printf("----------------------------\n");
-    printf("\n");
-}
-
-// Função para encontrar uma conta pelo número
-ContaBancaria *encontrarConta(int numeroConta)
-{
-    for (int i = 0; i < MAX_CONTAS && contas[i] != NULL; i++)
-    {
-        if (contas[i]->numero_conta == numeroConta)
-        {
-            return contas[i];
-        }
-    }
-    return NULL; // Retorna NULL se a conta não for encontrada
-}
-
 // Função para depositar em uma conta
 void depositar()
 {
@@ -244,6 +188,63 @@ void depositarSacar()
         }
     }
 }
+
+// No seu switch-case, você pode chamar essa função quando o usuário escolher a opção 3
+
+void mostrarSaldoTotal()
+{
+    double saldoTotal = 0.0;
+
+    // Iterar sobre todas as contas e somar os saldos
+    printf("\n------------ LISTA DE CONTAS ------------\n");
+    for (int i = 0; i < MAX_CONTAS && contas[i] != NULL; i++)
+    {
+        printf("Conta: %d\n", contas[i]->numero_conta);
+        printf("Titular: %s\n", contas[i]->nome_titular);
+        printf("Saldo: R$%.2lf\n", contas[i]->saldo);
+        printf("-----------------------------\n");
+    }
+    for (int i = 0; i < MAX_CONTAS && contas[i] != NULL; i++)
+    {
+        saldoTotal += contas[i]->saldo;
+    }
+
+    // Exibir o saldo total
+    printf("Saldo total de todas as contas: R$ %.2lf\n", saldoTotal);
+}
+
+// Função para editar informações do titular de uma conta
+void editarInformacoes(ContaBancaria *conta)
+{
+    // Solicitar novas informações ao usuário
+    printf("Digite o novo nome do titular: ");
+    clean_stdin();
+    fgets(conta->nome_titular, 50, stdin);
+    conta->nome_titular[strcspn(conta->nome_titular, "\n")] = 0;
+
+    printf("Digite o novo saldo: R$ ");
+    scanf("%lf", &conta->saldo);
+
+    printf("\n");
+    printf("----------------------------\n");
+    printf("Informacoes da conta atualizadas com sucesso!\n");
+    printf("----------------------------\n");
+    printf("\n");
+}
+
+// Função para encontrar uma conta pelo número
+ContaBancaria *encontrarConta(int numeroConta)
+{
+    for (int i = 0; i < MAX_CONTAS && contas[i] != NULL; i++)
+    {
+        if (contas[i]->numero_conta == numeroConta)
+        {
+            return contas[i];
+        }
+    }
+    return NULL; // Retorna NULL se a conta não for encontrada
+}
+
 
 // Função para remover uma conta bancária
 void removerConta(int numeroConta)
@@ -427,7 +428,7 @@ void realizarAcao()
         // Adicione aqui a chamada para a ação que deseja realizar
         printf("\nDeseja voltar ao menu?\n");
         printf("1 - Sim\n");
-        printf("2 - Nao\n");
+        printf("2 - Nao - para encerrar a sessao no banco\n");
         printf("Escolha: ");
         scanf("%d", &escolha);
 
@@ -532,7 +533,6 @@ int main()
             break;
         case 2:
             depositarSacar();
-            realizarAcao();
             break;
         case 3:
             mostrarSaldoTotal();

@@ -1,16 +1,16 @@
 # Banco Massa de Mais Véi
 
-<div style="text-align:center">
-<img alt="Banco" src="output/Sem título.jpeg"/>
-</div>
+<p align="center">
+  <img alt="Banco" src="output/Sem título.jpeg"/>
+</p>
 
 ### Tutorial
 
-- Utilize um compilador da linguagem C ex.: <a href="https://gcc.gnu.org/">GCC<a>
+- Utilize um compilador da linguagem `C` ex.: <a href="https://gcc.gnu.org/">GCC</a>
 
 - Inicie o programa e coloque a senha do sistema. O padrão é `money`
 
-- Após isso selecione uma opção disponível no menu:
+- Após isso selecione uma opção disponível no menu entre 1 e 8:
 
 ```
 ------------ MENU ------------
@@ -24,7 +24,7 @@
 8 - SAIR
 ```
 
-> é recomendado que crie uma conta antes de fazer qualquer outra coisa.
+> _é recomendado que crie uma conta antes de fazer qualquer outra coisa._
 
 - Depois o sistema pode ser utilizado livremente.
 

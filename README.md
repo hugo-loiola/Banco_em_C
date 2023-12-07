@@ -5,8 +5,11 @@
 </div>
 
 ### Tutorial
-- Utilize um compilador da linguagem C
-- Inicie o programa e coloque a senha do sistema.
+
+- Utilize um compilador da linguagem C ex.: <a href="https://gcc.gnu.org/">GCC<a>
+
+- Inicie o programa e coloque a senha do sistema. O padrão é `money`
+
 - Após isso selecione uma opção disponível no menu:
 
 ```

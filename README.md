@@ -1,7 +1,7 @@
 # Banco Massa de Mais Véi
 
 <div style="text-align:center">
-<img src=" https://captadores.org.br/wp-content/uploads/2016/05/bancos.png"/>
+<img alt="Banco" src="output/Sem título.jpeg"/>
 </div>
 
 ### Tutorial
